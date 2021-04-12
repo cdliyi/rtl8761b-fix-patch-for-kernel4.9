@@ -1,0 +1,45 @@
+diff --git a/drivers/bluetooth//btrtl.c b/drivers/bluetooth/btrtl.c
+index fc9b257..25d0926 100644
+--- a/drivers/bluetooth/btrtl.c
++++ b/drivers/bluetooth/btrtl.c
+@@ -32,7 +32,7 @@
+ #define RTL_ROM_LMP_8723A      0x1200
+ #define RTL_ROM_LMP_8723B      0x8723
+ #define RTL_ROM_LMP_8821A      0x8821
+-#define RTL_ROM_LMP_8761A      0x8761
++#define RTL_ROM_LMP_8761B      0x8761
+ #define RTL_ROM_LMP_8822B      0x8822
+ 
+ static int rtl_read_rom_version(struct hci_dev *hdev, u8 *version)
+@@ -86,7 +86,7 @@ static int rtl8723b_parse_firmware(struct hci_dev *hdev, u16 lmp_subver,
+                { RTL_ROM_LMP_8723A, 0 },
+                { RTL_ROM_LMP_8723B, 1 },
+                { RTL_ROM_LMP_8821A, 2 },
+-               { RTL_ROM_LMP_8761A, 3 },
++               { RTL_ROM_LMP_8761B, 14 },
+                { RTL_ROM_LMP_8822B, 8 },
+        };
+ 
+@@ -339,8 +339,8 @@ static int btrtl_setup_rtl8723b(struct hci_dev *hdev, u16 lmp_subver,
+        case RTL_ROM_LMP_8821A:
+                cfg_name = "rtl_bt/rtl8821a_config.bin";
+                break;
+-       case RTL_ROM_LMP_8761A:
+-               cfg_name = "rtl_bt/rtl8761a_config.bin";
++       case RTL_ROM_LMP_8761B:
++               cfg_name = "rtl_bt/rtl8761b_config.bin";
+                break;
+        case RTL_ROM_LMP_8822B:
+                cfg_name = "rtl_bt/rtl8822b_config.bin";
+@@ -454,9 +454,9 @@ int btrtl_setup_realtek(struct hci_dev *hdev)
+        case RTL_ROM_LMP_8821A:
+                return btrtl_setup_rtl8723b(hdev, lmp_subver,
+                                            "rtl_bt/rtl8821a_fw.bin");
+-       case RTL_ROM_LMP_8761A:
++       case RTL_ROM_LMP_8761B:
+                return btrtl_setup_rtl8723b(hdev, lmp_subver,
+-                                           "rtl_bt/rtl8761a_fw.bin");
++                                           "rtl_bt/rtl8761b_fw.bin");
+        case RTL_ROM_LMP_8822B:
+                return btrtl_setup_rtl8723b(hdev, lmp_subver,
+                                            "rtl_bt/rtl8822b_fw.bin");
